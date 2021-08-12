@@ -1,0 +1,10 @@
+.vscode
+rubbish
+log
+build
+**http/core/test/*
+!**http/core/test/*.cpp
+
+**http/tool/test/*
+!**http/tool/test/*.cpp
+
