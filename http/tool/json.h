@@ -111,7 +111,7 @@ class Json {
       tmp.append(std::move(v.second.toString(flag)));
       tmp.push_back(',');
     }
-    tmp.pop_back();
+    if (dict_.size()) tmp.pop_back();
     tmp.push_back('}');
     return tmp;
   }
@@ -162,10 +162,10 @@ class JsonParse {
   return lins::Json(std::move(res)); \
   }
 
-struct JSON {
-  virtual lins::Json dump() = 0;
-  virtual void load(const lins::Json& json) = 0;
-};
+// struct JSON {
+//   virtual lins::Json dump() = 0;
+//   virtual void load(const lins::Json& json) = 0;
+// };
 
 template <typename T>
 lins::Json json_dump(T rsh) {
@@ -174,6 +174,17 @@ lins::Json json_dump(T rsh) {
 lins::Json json_dump(int rsh);
 lins::Json json_dump(bool rsh);
 lins::Json json_dump(std::string rsh);
-
+template <typename T>
+lins::Json json_dump(std::vector<T> rhs) {
+  std::vector<lins::Json> json;
+  for (auto v : rhs) json.push_back(json_dump(v));
+  return lins::Json(std::move(json));
+}
+template <typename VALUE>
+lins::Json json_dump(std::map<std::string, VALUE> rhs) {
+  std::map<std::string, lins::Json> json;
+  for (auto v : rhs) json.insert({v.first, json_dump(v.second)});
+  return lins::Json(std::move(json));
+}
 };  // namespace lins
 #endif

@@ -1,5 +1,10 @@
 #include "userLogin.h"
-
+struct temp {
+  std::vector<int> ve;
+  BEGIN_DUMP_JSON
+  MAPPING(ve, "password");
+  END_DUMP_JSON
+};
 struct user {
   std::string name;
   std::string password;
