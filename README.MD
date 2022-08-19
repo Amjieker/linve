@@ -1,5 +1,4 @@
-@[TOC]
-# 基于 Linux 的高性能 web 服务器
+# 基于 Linux 的高性能 HTTP 服务器
 
 ## 功能
 > 1. 基于 epoll + proactor 构建的高并发模型
@@ -93,7 +92,8 @@ struct classroom {
       tch.push_back(t);
     }
   }
-  BEGIN_DUMP_JSON MAPPING(stu, "stu");
+  BEGIN_DUMP_JSON 
+  MAPPING(stu, "stu");
   MAPPING(tch, "tch");
   END_DUMP_JSON
 };
